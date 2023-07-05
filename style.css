@@ -1,0 +1,213 @@
+:root {
+    --black: #000000;
+   --white: #FFFFFF; 
+   --white-snow: #FFFAFA;
+   --gray-gainsboro: #DCDCDC;
+   --yellow: yellow;
+   --green: green;
+   --green-yellow: #ADFF2F;
+   --violet-red: #C71585;
+   --red: red;
+   --w: 1200px;
+   --m: 2px 0px;
+   --p: 0.5rem 1rem;  
+}
+
+
+body {
+    box-sizing: border-box;
+   
+}
+button { 
+    cursor: pointer;
+}
+
+
+#to-do {    
+    width: var(--w);
+}
+
+.list {
+ --w: 12.5rem;
+ width: var(--w);
+}
+
+.container-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-item:not(:disabled) {
+    cursor: pointer;
+}
+
+
+.input-edit {
+    --w: 100%;   
+    width: var(--w);
+    margin: var(--m);
+    padding: var(--p);
+    border: var(--white)
+}
+
+fieldset {
+    --w: 600px;
+    width: var(--w);
+}
+
+fieldset:has(:checked ) div:has(input[type=checkbox]:checked) .input-edit   {
+    text-decoration: line-through;
+    color: var(--violet-red);
+}
+
+
+fieldset:has(:checked ) div:has(input[type=checkbox]:checked) .input-edit:focus {
+    text-decoration:none;
+}
+
+.btn-edit {
+    transition: .2s background-color;
+    cursor: pointer;
+}
+
+.btn-edit:hover { background-color: var(--gray-gainsboro);}
+
+
+.btn-edit.disable {
+    border-color: var(--violet-red)
+}
+
+.select-importance {}
+
+fieldset:has(:checked )  div:has(option[value="low"]:checked) .select-importance    {
+    --bgc-h: 120deg;
+    --bgc-s: 46%;
+    --bgc-l: 70%;
+    --hsl: hsl(var(--bgc-h) var(--bgc-s) var(--bgc-l));
+    background-color:  var(--hsl, --green);
+}
+
+fieldset:has(:checked )  div:has(option[value="midlle"]:checked) .select-importance    {
+    --bgc-h: 60deg;
+    --bgc-s: 66%;
+    --bgc-l: 64%;
+    --hsl: hsl(var(--bgc-h) var(--bgc-s) var(--bgc-l));
+    background-color:  var(--hsl, --yellow);
+}
+
+fieldset:has(:checked )  div:has(option[value="high"]:checked) .select-importance    {
+    --bgc-h: 0deg;
+    --bgc-s: 38%;
+    --bgc-l: 80%;
+    --hsl: hsl(var(--bgc-h) var(--bgc-s) var(--bgc-l));
+    background-color: var(--hsl, --red) ;
+}
+
+.select-importance option[value="low"]{
+    background-color: var(--green);
+}
+
+.select-importance option[value="midlle"]{
+    background-color: var(--yellow);
+}
+
+.select-importance option[value="high"]{
+    background-color: var(--red);
+}
+
+/* Modal */
+
+.overlay {
+    --w: 100vw;
+    --h: 100vh;
+    --t: 0rem;
+    --b: 0rem;
+    --l: 0rem;
+    --r: 0rem;
+    --bgc: #00000040;
+    position: absolute;   
+    visibility:hidden;
+    top: var(--t) ;
+    left: var(--l);
+    right: var(--r);
+    bottom: var(--b);
+    width: var(--w);
+    height: var(--h);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bgc);
+    z-index: 100;
+}
+
+.modal {
+    --w: 100%;
+    --h: 420px;
+    --m: 20px;
+    position: relative;    
+    max-width: var(--w);
+    height: var(--h);  
+    margin: var(--m);
+    background-color: var(--white);
+    border-radius:  0.5rem;
+    z-index: 110;
+   
+}
+
+.modal-close {
+    --t: -25px;
+    --r: -25px;
+    position: absolute;
+    top: var(--t);
+    right: var(--r);
+    color: var(--red);
+    z-index: 111;
+    cursor: pointer;
+}
+
+.table-wrapp {
+    --h: 406px;
+    overflow: hidden;
+    overflow-y: auto;
+    height: var(--h);
+}
+
+.active {   
+    visibility: visible;
+}
+
+/* Table */
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200,200,200);
+    letter-spacing: 1px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin: 20px ;
+  }
+
+  td, th {
+    border: 1px solid rgb(190,190,190);
+    padding: 10px 20px;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  td.green-bgc {
+    background-color: var(--green)
+  }
+  
+  td.yellow-bgc {
+    background-color: var(--yellow)
+  }
+
+  td.red-bgc {
+    background-color: var(--red)
+  }
+
+  caption {
+    padding: 10px;
+  }

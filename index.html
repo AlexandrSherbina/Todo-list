@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>    
+    <fieldset id="list-1">
+        <legend>To Do List: 
+            <button id="btn-all-tasks" class="btns" type="button">All tasks</button>
+            <button id="btn-completed-tasks" class="btns" type="button">Completed tasks</button>
+            <button id="btn-pending-tasks" class="btns" type="button">Pending tasks</button>
+            <!-- <button id="btn-update-tasks" class="btns" type="button">Update tasks</button> -->
+            <button id="btn-add-item" class="btns" type="button">Add Item +</button>
+            <button id="btn-remove-items" class="btns" type="button">Remove All</button>
+            <button type="button" id="testTasks">Test</button>
+        </legend>
+    </fieldset>
+   <div class="overlay">
+    <div class="modal">
+        <button  type="button" class="modal-close">X</button>
+        <div class="table-wrapp"></div>
+    </div>
+   </div>
+    <script type="module" src="script.js"></script>  
+</body>
+</html>
