@@ -2,6 +2,7 @@
     --black: #000000;
    --white: #FFFFFF; 
    --white-snow: #FFFAFA;
+   --gray: #A9A9A9	;
    --gray-gainsboro: #DCDCDC;
    --yellow: yellow;
    --green: green;
@@ -11,17 +12,57 @@
    --w: 1200px;
    --m: 2px 0px;
    --p: 0.5rem 1rem;  
+   --fs: 1rem;
+   --scale: 1.5;
+   --bx-sh: 10px 5px 5px var(--gray-gainsboro);
+   --trn: all 0.4s;
+   --br-l-petal: 1rem 6.25rem 1rem 6.25rem;
+   --br-r-petal:  6.25rem 1rem 6.25rem 1rem;
 }
 
 
 body {
     box-sizing: border-box;
-   
+    background: linear-gradient(180deg,#7bd122,#6d2a2a);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationBody 31s ease infinite;
+    -moz-animation: AnimationBody 31s ease infinite;
+    animation: AnimationBody 31s ease infinite;   
 }
+
+
+
+@-webkit-keyframes AnimationBody {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationBody {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationBody {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+
 button { 
+    transition: all 0.4s;
     cursor: pointer;
 }
 
+fieldset {
+    --w: 600px;
+    width: var(--w);
+}
+
+legend {
+    font-size: calc(1rem + var(--fs) );
+}
 
 #to-do {    
     width: var(--w);
@@ -36,25 +77,36 @@ button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .checkbox-item:not(:disabled) {
     cursor: pointer;
 }
 
+/* Edit */
 
 .input-edit {
-    --w: 100%;   
+    --w: 100%;     
     width: var(--w);
     margin: var(--m);
     padding: var(--p);
-    border: var(--white)
+    border: var(--white);
+    transition: all .4s;
 }
 
-fieldset {
-    --w: 600px;
+.input-edit.transform { 
+    --w: 16rem; 
+    --mb: 2rem;
+    --trs-x: 1.5rem;
+    --trs-y: 1rem;   
     width: var(--w);
+    margin-bottom: var(--mb);
+    box-shadow: var(--bx-sh);
+    transform: translate(var(--trs-x), var(--trs-y)) scale(var(--scale));
 }
+
+
 
 fieldset:has(:checked ) div:has(input[type=checkbox]:checked) .input-edit   {
     text-decoration: line-through;
@@ -66,19 +118,76 @@ fieldset:has(:checked ) div:has(input[type=checkbox]:checked) .input-edit:focus 
     text-decoration:none;
 }
 
-.btn-edit {
-    transition: .2s background-color;
-    cursor: pointer;
+/*Button*/
+
+.btn {} 
+
+.container-btns {}
+
+.btns {
+    --p: 0.5rem;   
+    --clr: var(--white);
+    --b-r: 0.5rem;   
+    padding: var(--p);   
+    background: linear-gradient(to bottom right ,var(--red), var(--green));
+    border-color: var(--yellow) var(--gray);
+    color: var(--clr);
+    border-radius: var(--b-r);
 }
 
-.btn-edit:hover { background-color: var(--gray-gainsboro);}
+.btns:hover {   
+    background: linear-gradient(270deg, #246655, #fe2424);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationButton 1s ease-in-out 1;
+    -moz-animation: AnimationButton 1s ease-in-out 1;
+    animation: AnimationButton 1s ease-in-out 1;
+}
 
+@-webkit-keyframes AnimationButton {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationButton {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationButton {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.btn-task {    
+    padding: var(--p);
+    border-radius: var(--br-l-petal);
+    border-color:  #708090 #DCDCDC;
+}
+
+.btn-edit {}
+
+.btn-del:hover,
+.btn-edit:hover {
+     background-color: aliceblue;
+     border-radius: var(--br-r-petal);
+     border-color:   #2F4F4F #708090;
+     color: goldenrod;
+    }
 
 .btn-edit.disable {
-    border-color: var(--violet-red)
+    border-color: var(--violet-red);   
 }
 
-.select-importance {}
+/*Select*/
+
+.select-container {
+    margin-left: auto;
+}
+
+.select-importance {
+    cursor: pointer;
+}
 
 fieldset:has(:checked )  div:has(option[value="low"]:checked) .select-importance    {
     --bgc-h: 120deg;
@@ -134,7 +243,7 @@ fieldset:has(:checked )  div:has(option[value="high"]:checked) .select-importanc
     bottom: var(--b);
     width: var(--w);
     height: var(--h);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background-color: var(--bgc);
@@ -174,6 +283,7 @@ fieldset:has(:checked )  div:has(option[value="high"]:checked) .select-importanc
 }
 
 .active {   
+    display: flex;
     visibility: visible;
 }
 
@@ -210,4 +320,31 @@ table {
 
   caption {
     padding: 10px;
+  }
+
+  .remove {
+  
+    transition:  all 2s  ease-in-out ;
+    animation-duration: 3s;
+    animation-name: remove-item;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    
+  }
+
+  @keyframes remove-item {
+    0% {
+        margin-left: 25%;
+        opacity: 0.5;
+        box-shadow:  var(--bx-sw);
+    }
+    50% {
+        margin-left: -25%;
+        opacity: 1;
+    }
+
+    100% {
+        margin-left: -100%;
+        opacity: 0.2;
+    }
   }

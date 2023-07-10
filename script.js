@@ -13,15 +13,15 @@ import {modalOpen} from './js/modal.js'
                 <div class="container-item" >
                     <input disabled class="checkbox-item" type="checkbox" name="scales" >         
                     <input  disabled class="input-edit" type="text" placeholder="${content +  index}" >
-                    <div >
+                    <div class="select-container">
                         <select class="select-importance">
                             <option value="low">Low</option>
                             <option value="midlle" selected>Midlle</option>
                             <option value="high">High</option>
                         </select>
                     </div>
-                    <button id="id-edit-${index}" type="button"  class="btn-edit">Edit</button>
-                    <button id="id-del-${index}" class="btn-del" type="button">Delete</button>
+                    <button id="id-edit-${index}" type="button"  class="btn btn-task btn-edit">Edit</button>
+                    <button id="id-del-${index}" class="btn btn-task btn-del" type="button">Delete</button>
                 </div>
                 `)
             index++;          
@@ -33,13 +33,19 @@ import {modalOpen} from './js/modal.js'
                     return createItem();
                 })
         };    
-
-        function removeAllTasks() {           
+        function removeAllTasks() {
             document.querySelector('#btn-remove-items')
                 .addEventListener('click', (e) => {
-                   document.querySelectorAll('.container-item').forEach(item => item.remove())
-                   myToDoList.removeAll();
-                   localStorage.clear();
+                    document.querySelectorAll('.container-item').forEach((item, i) => {
+                        setTimeout(() => {
+                            item.classList.add('remove')
+                        }, 10 * i);
+                        setTimeout(() => {
+                            item.remove()
+                        }, 500);
+                    })
+                    myToDoList.removeAll();
+                    localStorage.clear();
                 })
         }
 
@@ -169,7 +175,10 @@ import {modalOpen} from './js/modal.js'
                     if (input.disabled) {
                         input.disabled = false;                        
                         button.classList.add('disable')
-                        button.textContent = 'Save';                       
+                        button.textContent = 'Save'; 
+                        input.classList.add('transform');
+                        input.focus()
+                                             
                     } else {
                         const option = parent.querySelector('option:checked');
 
@@ -177,7 +186,7 @@ import {modalOpen} from './js/modal.js'
                         checkbox.disabled = false;
                         button.classList.remove('disable');
                         button.textContent = 'Edit';                                              
-
+                        input.classList.remove('transform');
                         const idItem =  parent.getAttribute('id-task' );
                         const hasAttr =  parent.hasAttribute('id-task');
 
@@ -213,10 +222,8 @@ import {modalOpen} from './js/modal.js'
                     let parent = target.parentNode;
                     if (parent.hasAttribute('id-task')) {
                         const idItem = parent.getAttribute('id-task');
-                        const task = myToDoList.findTask(idItem);
-                        parent.style.transition = '.4s all'
-                        parent.style.opacity = '0.5';
-                        parent.style.marginLeft = '-200px';
+                        const task = myToDoList.findTask(idItem);                      
+                        parent.classList.add('remove');
 
                        setTimeout(() => {
                         myToDoList.removeTask(task);
@@ -242,15 +249,15 @@ import {modalOpen} from './js/modal.js'
                 <div class="container-item" id-task=${task.id}>
                     <input  class="checkbox-item" type="checkbox" name="scales" >         
                     <input  disabled value="${description}" class="input-edit" type="text" placeholder="${content +  task.id}" >
-                    <div >
+                    <div class="select-container" >
                         <select class="select-importance">
                             <option value="low" ${importance === 'low' ? 'selected': ''}>Low</option>
                             <option value="midlle" ${importance === 'midlle' ? 'selected': ''}>Midlle</option>
                             <option value="high" ${importance === 'high' ? 'selected': ''}>High</option>
                         </select>
                     </div>
-                    <button id="id-edit-${task.id}" type="button"  class="btn-edit">Edit</button>
-                    <button id="id-del-${task.id}" class="btn-del" type="button">Delete</button>
+                    <button id="id-edit-${task.id}" type="button"  class="btn btn-task btn-edit">Edit</button>
+                    <button id="id-del-${task.id}" class="btn btn-task btn-del" type="button">Delete</button>
                 </div>
                 `)
                 id = task.id + 1;
